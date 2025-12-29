@@ -36,4 +36,6 @@ export type CalendarAction =
   | { type: 'ADD_PHOTO'; month: number; slotIndex: 0 | 1 | 2; photo: PhotoTransform }
   | { type: 'UPDATE_PHOTO'; month: number; slotIndex: number; updates: Partial<PhotoTransform> }
   | { type: 'DELETE_PHOTO'; month: number; slotIndex: number }
+  | { type: 'CLEAR_MONTH_PHOTOS'; month: number }
+  | { type: 'CLEAR_ALL_PHOTOS' }
   | { type: 'LOAD_STATE'; state: CalendarState };

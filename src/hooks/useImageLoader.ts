@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react';
 import { loadImageFile, resizeImage, generatePhotoId, getImageDimensions, getOrientation } from '../utils/imageUtils';
 import type { PhotoTransform } from '../types/calendar';
 
-const MAX_IMAGE_WIDTH = 1200;
-const MAX_IMAGE_HEIGHT = 800;
+const MAX_IMAGE_WIDTH = 800;
+const MAX_IMAGE_HEIGHT = 600;
 
 export function useImageLoader() {
   const [loading, setLoading] = useState(false);

@@ -11,23 +11,45 @@ interface PhotoControlsProps {
 export function PhotoControls({ month, slotIndex, photo }: PhotoControlsProps) {
   const { dispatch } = useCalendar();
 
+  const getRotatedOrientation = (newRotation: number) => {
+    // 원본 이미지의 orientation 계산
+    const originalOrientation = photo.width > photo.height ? 'landscape' :
+                                photo.width < photo.height ? 'portrait' : 'square';
+
+    // 90도 또는 270도 회전하면 가로<->세로 전환
+    if (newRotation === 90 || newRotation === 270) {
+      if (originalOrientation === 'landscape') return 'portrait';
+      if (originalOrientation === 'portrait') return 'landscape';
+    }
+
+    return originalOrientation;
+  };
+
   const handleRotateLeft = () => {
     const newRotation = (photo.rotation - 90 + 360) % 360;
+    const newOrientation = getRotatedOrientation(newRotation);
     dispatch({
       type: 'UPDATE_PHOTO',
       month,
       slotIndex,
-      updates: { rotation: newRotation },
+      updates: {
+        rotation: newRotation,
+        orientation: newOrientation,
+      },
     });
   };
 
   const handleRotateRight = () => {
     const newRotation = (photo.rotation + 90) % 360;
+    const newOrientation = getRotatedOrientation(newRotation);
     dispatch({
       type: 'UPDATE_PHOTO',
       month,
       slotIndex,
-      updates: { rotation: newRotation },
+      updates: {
+        rotation: newRotation,
+        orientation: newOrientation,
+      },
     });
   };
 

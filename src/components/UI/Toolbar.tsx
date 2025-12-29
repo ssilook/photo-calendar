@@ -20,9 +20,26 @@ export function Toolbar({ onShowPrintPreview }: ToolbarProps) {
     dispatch({ type: 'SET_CURRENT_MONTH', month: newMonth });
   };
 
+  const handleClearAll = () => {
+    if (window.confirm('모든 월의 사진을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+      dispatch({ type: 'CLEAR_ALL_PHOTOS' });
+    }
+  };
+
+  const hasAnyPhotos = state.months.some((month) =>
+    month.photos.some((photo) => photo !== null)
+  );
+
   return (
     <div className="toolbar">
-      <YearSelector />
+      <div className="toolbar-left">
+        <YearSelector />
+        {hasAnyPhotos && (
+          <button onClick={handleClearAll} className="clear-all-button">
+            모든 사진 초기화
+          </button>
+        )}
+      </div>
 
       <div className="month-navigation">
         <button onClick={handlePrevMonth} className="nav-button">

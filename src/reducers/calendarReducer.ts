@@ -94,6 +94,30 @@ export function calendarReducer(
       };
     }
 
+    case 'CLEAR_MONTH_PHOTOS': {
+      const newMonths = [...state.months];
+      const monthData = { ...newMonths[action.month] };
+      monthData.photos = [null, null, null];
+      newMonths[action.month] = monthData;
+
+      return {
+        ...state,
+        months: newMonths,
+      };
+    }
+
+    case 'CLEAR_ALL_PHOTOS': {
+      const newMonths = state.months.map((month) => ({
+        ...month,
+        photos: [null, null, null] as [null, null, null],
+      }));
+
+      return {
+        ...state,
+        months: newMonths,
+      };
+    }
+
     case 'LOAD_STATE': {
       return action.state;
     }

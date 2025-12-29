@@ -1,8 +1,8 @@
 .photo-section {
-  height: 60%;
+  height: 45%;
   display: flex;
-  gap: 2mm;
-  padding: 5mm;
+  gap: 1mm;
+  padding: 3mm;
   background: #f9f9f9;
 }
 
@@ -17,9 +17,8 @@
 }
 
 .print-photo-slot img {
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
+  position: relative;
 }
 
 .empty-photo-placeholder {
@@ -46,6 +45,12 @@
   flex: 1;
 }
 
+.photo-section.layout-default .print-photo-slot img,
+.photo-section.layout-all-landscape .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
+}
+
 /* 모두 세로 - 3개 세로 배치 */
 .photo-section.layout-all-portrait {
   display: flex;
@@ -57,22 +62,33 @@
   flex: 1;
 }
 
+.photo-section.layout-all-portrait .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
+}
+
 /* 가로 2개 + 세로 1개 */
 .photo-section.layout-two-landscape-one-portrait {
   display: flex;
   flex-direction: row;
-  gap: 2mm;
+  gap: 1mm;
 }
 
 .photo-section.layout-two-landscape-one-portrait .landscape-column {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2mm;
+  gap: 1mm;
 }
 
 .photo-section.layout-two-landscape-one-portrait .landscape-column .print-photo-slot {
   flex: 1;
+  max-height: calc(50% - 0.5mm);
+}
+
+.photo-section.layout-two-landscape-one-portrait .landscape-column .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
 }
 
 .photo-section.layout-two-landscape-one-portrait .portrait-column {
@@ -84,31 +100,48 @@
   flex: 1;
 }
 
+.photo-section.layout-two-landscape-one-portrait .portrait-column .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
+}
+
 /* 세로 2개 + 가로 1개 */
 .photo-section.layout-two-portrait-one-landscape {
   display: flex;
   flex-direction: column;
-  gap: 2mm;
+  gap: 1mm;
 }
 
 .photo-section.layout-two-portrait-one-landscape .landscape-row {
   flex: 1;
   display: flex;
+  max-height: calc(50% - 0.5mm);
 }
 
 .photo-section.layout-two-portrait-one-landscape .landscape-row .print-photo-slot {
   flex: 1;
 }
 
+.photo-section.layout-two-portrait-one-landscape .landscape-row .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
+}
+
 .photo-section.layout-two-portrait-one-landscape .portrait-row {
   flex: 1;
   display: flex;
   flex-direction: row;
-  gap: 2mm;
+  gap: 1mm;
+  max-height: calc(50% - 0.5mm);
 }
 
 .photo-section.layout-two-portrait-one-landscape .portrait-row .print-photo-slot {
   flex: 1;
+}
+
+.photo-section.layout-two-portrait-one-landscape .portrait-row .print-photo-slot img {
+  max-width: 95%;
+  max-height: 95%;
 }
 
 @media print {

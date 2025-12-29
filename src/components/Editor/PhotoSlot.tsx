@@ -18,6 +18,7 @@ export function PhotoSlot({ month, slotIndex, photo }: PhotoSlotProps) {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // 모든 Hook을 early return 전에 호출
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -28,6 +29,37 @@ export function PhotoSlot({ month, slotIndex, photo }: PhotoSlotProps) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (isDragging && photo) {
+      const handleMouseMove = (e: MouseEvent) => {
+        const newTranslateX = e.clientX - dragStart.x;
+        const newTranslateY = e.clientY - dragStart.y;
+
+        dispatch({
+          type: 'UPDATE_PHOTO',
+          month,
+          slotIndex,
+          updates: {
+            translateX: newTranslateX,
+            translateY: newTranslateY,
+          },
+        });
+      };
+
+      const handleMouseUp = () => {
+        setIsDragging(false);
+      };
+
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, dragStart, photo, dispatch, month, slotIndex]);
 
   if (!photo) {
     return (
@@ -49,39 +81,6 @@ export function PhotoSlot({ month, slotIndex, photo }: PhotoSlotProps) {
       y: e.clientY - photo.translateY,
     });
   };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging) return;
-
-    const newTranslateX = e.clientX - dragStart.x;
-    const newTranslateY = e.clientY - dragStart.y;
-
-    dispatch({
-      type: 'UPDATE_PHOTO',
-      month,
-      slotIndex,
-      updates: {
-        translateX: newTranslateX,
-        translateY: newTranslateY,
-      },
-    });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [isDragging, dragStart]);
 
   const transformStyle = `
     translate(${photo.translateX}px, ${photo.translateY}px)

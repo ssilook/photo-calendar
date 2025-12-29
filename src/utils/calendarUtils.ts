@@ -60,3 +60,50 @@ export function generateCalendarGrid(year: number, month: number): (number | nul
 
   return grid;
 }
+
+// 한국 법정공휴일 데이터 (2026년)
+const holidays2026: { [key: string]: string } = {
+  '1-1': '신정',
+  '2-16': '설날 연휴',
+  '2-17': '설날',
+  '2-18': '설날 연휴',
+  '3-1': '삼일절',
+  '5-5': '어린이날',
+  '5-24': '부처님오신날',
+  '6-6': '현충일',
+  '8-15': '광복절',
+  '9-24': '추석 연휴',
+  '9-25': '추석',
+  '9-26': '추석 연휴',
+  '10-3': '개천절',
+  '10-9': '한글날',
+  '12-25': '크리스마스',
+};
+
+// 공휴일 확인 함수
+export function isHoliday(year: number, month: number, day: number): boolean {
+  if (year === 2026) {
+    const key = `${month + 1}-${day}`;
+    return key in holidays2026;
+  }
+  return false;
+}
+
+// 공휴일 이름 반환 함수
+export function getHolidayName(year: number, month: number, day: number): string | null {
+  if (year === 2026) {
+    const key = `${month + 1}-${day}`;
+    return holidays2026[key] || null;
+  }
+  return null;
+}
+
+// 주말 확인 함수
+export function isWeekend(year: number, month: number, day: number): { isSunday: boolean; isSaturday: boolean } {
+  const date = new Date(year, month, day);
+  const dayOfWeek = date.getDay();
+  return {
+    isSunday: dayOfWeek === 0,
+    isSaturday: dayOfWeek === 6,
+  };
+}
