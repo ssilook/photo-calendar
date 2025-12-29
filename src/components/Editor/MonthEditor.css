@@ -1,0 +1,28 @@
+.month-editor {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.month-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.photo-slots-section,
+.calendar-section {
+  margin-bottom: 40px;
+}
+
+.photo-slots-section h3,
+.calendar-section h3 {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.photo-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}

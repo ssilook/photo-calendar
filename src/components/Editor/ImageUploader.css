@@ -1,0 +1,38 @@
+.image-uploader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.image-uploader:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.image-uploader p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.image-uploader p:first-child {
+  font-size: 32px;
+  font-weight: 300;
+  color: #999;
+}
+
+.upload-hint {
+  font-size: 14px;
+}
+
+.error {
+  color: #ff5555;
+  font-size: 12px;
+}

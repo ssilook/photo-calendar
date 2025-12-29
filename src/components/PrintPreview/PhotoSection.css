@@ -1,0 +1,122 @@
+.photo-section {
+  height: 60%;
+  display: flex;
+  gap: 2mm;
+  padding: 5mm;
+  background: #f9f9f9;
+}
+
+.print-photo-slot {
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e0e0;
+}
+
+.print-photo-slot img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.empty-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  color: #ccc;
+  font-size: 14pt;
+}
+
+/* 기본 레이아웃 - 3개 가로 배치 */
+.photo-section.layout-default,
+.photo-section.layout-all-landscape {
+  display: flex;
+  flex-direction: row;
+  gap: 2mm;
+}
+
+.photo-section.layout-default .print-photo-slot,
+.photo-section.layout-all-landscape .print-photo-slot {
+  flex: 1;
+}
+
+/* 모두 세로 - 3개 세로 배치 */
+.photo-section.layout-all-portrait {
+  display: flex;
+  flex-direction: row;
+  gap: 2mm;
+}
+
+.photo-section.layout-all-portrait .print-photo-slot {
+  flex: 1;
+}
+
+/* 가로 2개 + 세로 1개 */
+.photo-section.layout-two-landscape-one-portrait {
+  display: flex;
+  flex-direction: row;
+  gap: 2mm;
+}
+
+.photo-section.layout-two-landscape-one-portrait .landscape-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.photo-section.layout-two-landscape-one-portrait .landscape-column .print-photo-slot {
+  flex: 1;
+}
+
+.photo-section.layout-two-landscape-one-portrait .portrait-column {
+  flex: 1;
+  display: flex;
+}
+
+.photo-section.layout-two-landscape-one-portrait .portrait-column .print-photo-slot {
+  flex: 1;
+}
+
+/* 세로 2개 + 가로 1개 */
+.photo-section.layout-two-portrait-one-landscape {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+
+.photo-section.layout-two-portrait-one-landscape .landscape-row {
+  flex: 1;
+  display: flex;
+}
+
+.photo-section.layout-two-portrait-one-landscape .landscape-row .print-photo-slot {
+  flex: 1;
+}
+
+.photo-section.layout-two-portrait-one-landscape .portrait-row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 2mm;
+}
+
+.photo-section.layout-two-portrait-one-landscape .portrait-row .print-photo-slot {
+  flex: 1;
+}
+
+@media print {
+  .photo-section {
+    background: white;
+  }
+
+  .empty-photo-placeholder {
+    background: white;
+  }
+}
